@@ -1,0 +1,78 @@
+.studio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.studio-card,
+.state-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.studio-card {
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.studio-card h2,
+.studio-card p {
+  margin: 0;
+}
+
+.studio-card p {
+  margin-top: 0.35rem;
+  color: var(--text-muted);
+}
+
+.studio-initial,
+.state-icon {
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--primary);
+  font-weight: 900;
+}
+
+.studio-initial {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  font-size: 1.25rem;
+}
+
+.state-card {
+  min-height: 420px;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.6rem;
+  text-align: center;
+}
+
+.state-card h2,
+.state-card p {
+  margin: 0;
+}
+
+.state-card p {
+  color: var(--text-muted);
+}
+
+.state-card.error {
+  border-color: rgba(255, 107, 107, 0.35);
+}
+
+.state-card.error .state-icon {
+  background: var(--danger);
+}
+
+.state-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 0.5rem;
+}

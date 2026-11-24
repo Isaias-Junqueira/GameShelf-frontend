@@ -5,8 +5,40 @@
   </div>
 </section>
 
-<section class="empty-state">
-  <span class="empty-icon">GS</span>
-  <h2>Nenhum estúdio carregado</h2>
-  <p>Os dados serão carregados da API Spring Boot.</p>
-</section>
+@if (loading) {
+  <section class="state-card" role="status">
+    <span class="state-icon">GS</span>
+    <p>Loading studios...</p>
+  </section>
+}
+
+@if (errorMessage) {
+  <section class="state-card error" role="alert">
+    <span class="state-icon">!</span>
+    <p>{{ errorMessage }}</p>
+  </section>
+}
+
+@if (!loading && !errorMessage && studios.length === 0) {
+  <section class="state-card">
+    <span class="state-icon">GS</span>
+    <h2>No studios yet</h2>
+    <p>Studio registration will be added in the next step.</p>
+  </section>
+}
+
+@if (!loading && studios.length > 0) {
+  <section class="studio-grid" aria-label="Studios">
+    @for (studio of studios; track studio.id) {
+      <article class="studio-card">
+        <span class="studio-initial">
+          {{ studio.name.charAt(0).toUpperCase() }}
+        </span>
+        <div>
+          <h2>{{ studio.name }}</h2>
+          <p>{{ studio.country }}</p>
+        </div>
+      </article>
+    }
+  </section>
+}
