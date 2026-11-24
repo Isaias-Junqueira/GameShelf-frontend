@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Studio } from '../../../core/models/studio.model';
 import { StudioService } from '../studio.service';
 
@@ -11,19 +11,19 @@ import { StudioService } from '../studio.service';
 export class Studios implements OnInit {
   private readonly studioService = inject(StudioService);
 
-  studios: Studio[] = [];
-  loading = true;
-  errorMessage = '';
+  readonly studios = signal<Studio[]>([]);
+  readonly loading = signal(true);
+  readonly errorMessage = signal('');
 
   ngOnInit(): void {
     this.studioService.findAll().subscribe({
       next: (studios) => {
-        this.studios = studios;
-        this.loading = false;
+        this.studios.set(studios);
+        this.loading.set(false);
       },
       error: () => {
-        this.errorMessage = 'Could not load studios.';
-        this.loading = false;
+        this.errorMessage.set('Could not load studios.');
+        this.loading.set(false);
       },
     });
   }

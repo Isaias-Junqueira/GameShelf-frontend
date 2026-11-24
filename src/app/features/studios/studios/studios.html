@@ -5,21 +5,21 @@
   </div>
 </section>
 
-@if (loading) {
+@if (loading()) {
   <section class="state-card" role="status">
     <span class="state-icon">GS</span>
     <p>Loading studios...</p>
   </section>
 }
 
-@if (errorMessage) {
+@if (errorMessage()) {
   <section class="state-card error" role="alert">
     <span class="state-icon">!</span>
-    <p>{{ errorMessage }}</p>
+    <p>{{ errorMessage() }}</p>
   </section>
 }
 
-@if (!loading && !errorMessage && studios.length === 0) {
+@if (!loading() && !errorMessage() && studios().length === 0) {
   <section class="state-card">
     <span class="state-icon">GS</span>
     <h2>No studios yet</h2>
@@ -27,9 +27,9 @@
   </section>
 }
 
-@if (!loading && studios.length > 0) {
+@if (!loading() && studios().length > 0) {
   <section class="studio-grid" aria-label="Studios">
-    @for (studio of studios; track studio.id) {
+    @for (studio of studios(); track studio.id) {
       <article class="studio-card">
         <span class="studio-initial">
           {{ studio.name.charAt(0).toUpperCase() }}
